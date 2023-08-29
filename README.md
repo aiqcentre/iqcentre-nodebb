@@ -1,5 +1,21 @@
 # ![NodeBB](public/images/sm-card.png)
 
+Step 1: Fork https://github.com/NodeBB/NodeBB
+Step 2: Fork latest branch & pull
+Step 3: Prepare a fresh MongoDB with connection string:
+mongodb+srv://admin:PigSnout1@cluster0.z10eqvc.mongodb.net/?retryWrites=true&w=majority
+Step 4: Pull to local repo
+Step 5: cd
+Step 6: Anaconda --> nodebb setup
+Step 7: DO NOT PROVIDE ADMIN
+Step 8: Add Procfile to root dir:
+web: ./nodebb start && ./nodebb log
+Step 9: Powershell --> cd
+Step 10: git add -f Procfile config.json package.json build
+Step 11: git commit -am "Prepare to deploy to Heroku"
+Step 12: git push
+Step 13: Heroku deploy
+
 [![Workflow](https://github.com/NodeBB/NodeBB/actions/workflows/test.yaml/badge.svg)](https://github.com/NodeBB/NodeBB/actions/workflows/test.yaml)
 [![Coverage Status](https://coveralls.io/repos/github/NodeBB/NodeBB/badge.svg?branch=master)](https://coveralls.io/github/NodeBB/NodeBB?branch=master)
 [![Code Climate](https://codeclimate.com/github/NodeBB/NodeBB/badges/gpa.svg)](https://codeclimate.com/github/NodeBB/NodeBB)
