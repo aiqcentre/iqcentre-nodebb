@@ -1,0 +1,1 @@
+module.exports = require('../../../../../node_modules/@nodebb/nodebb-plugin-reactions/public/admin.js');

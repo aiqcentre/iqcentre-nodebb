@@ -87,7 +87,29 @@
         "") + 
       "\n\t</div>\n\t<div class=\"message-body-wrapper hover-parent\">\n\t\t<div component=\"chat/message/body\" class=\"message-body ps-0 py-0 overflow-auto text-break\">\n\t\t\t" + 
       __escape(guard((context != null && context['messages'] != null) ? context['messages']['content'] : null)) + 
-      "\n\t\t</div>\n\t\t<!-- This partial intentionally left blank; overwritten by nodebb-plugin-reactions -->\n\t\t<div component=\"chat/message/controls\" class=\"position-relative\">\n\t\t\t<div class=\"btn-group border shadow-sm controls position-absolute bg-body hover-d-block end-0\" style=\"bottom:1rem;\">\n\t\t\t\t<!-- This partial intentionally left blank; overwritten by nodebb-plugin-reactions -->\n\t\t\t\t<button class=\"btn btn-sm btn-link\" data-action=\"reply\"><i class=\"fa fa-reply\"></i></button>\n\t\t\t\t" + 
+      "\n\t\t</div>\n\t\t" + 
+      (guard((context != null && context['config'] != null) ? context['config']['enableMessageReactions'] : null) ?
+        "\n<div class=\"reactions " + 
+          (guard((context != null && context['messages'] != null) ? context['messages']['deleted'] : null) ?
+            "hidden" :
+            "") + 
+          "\" component=\"message/reactions\" data-mid=\"" + 
+          __escape(guard((context != null && context['messages'] != null) ? context['messages']['mid'] : null)) + 
+          "\">\n\t" + 
+          compiled.blocks['messages.reactions'](helpers, context, guard, iter, helper) + 
+          "\n</div>\n" :
+        "") + 
+      "\n\t\t<div component=\"chat/message/controls\" class=\"position-relative\">\n\t\t\t<div class=\"btn-group border shadow-sm controls position-absolute bg-body hover-d-block end-0\" style=\"bottom:1rem;\">\n\t\t\t\t" + 
+      (guard((context != null && context['config'] != null) ? context['config']['enableMessageReactions'] : null) ?
+        "\n<button class=\"reaction-add btn btn-sm btn-link " + 
+          (guard((context != null && context['messages'] != null) ? context['messages']['maxReactionsReached'] : null) ?
+            "max-reactions" :
+            "") + 
+          "\" component=\"message/reaction/add\" data-mid=\"" + 
+          __escape(guard((context != null && context['messages'] != null) ? context['messages']['mid'] : null)) + 
+          "\" title=\"[[reactions:add-reaction]]\">\n    <i class=\"fa fa-face-smile\"></i>\n</button>\n" :
+        "") + 
+      "\n\n\n\t\t\t\t<button class=\"btn btn-sm btn-link\" data-action=\"reply\"><i class=\"fa fa-reply\"></i></button>\n\t\t\t\t" + 
       ((guard((context != null) ? context['isAdminOrGlobalMod'] : null) || (!guard((context != null && context['config'] != null) ? context['config']['disableChatMessageEditing'] : null) && guard((context != null && context['messages'] != null) ? context['messages']['self'] : null))) ?
         "\n\t\t\t\t<button class=\"btn btn-sm btn-link\" data-action=\"edit\"><i class=\"fa fa-pencil\"></i></button>\n\t\t\t\t<button class=\"btn btn-sm btn-link\" data-action=\"delete\"><i class=\"fa fa-trash\"></i></button>\n\t\t\t\t<button class=\"btn btn-sm btn-link\" data-action=\"restore\"><i class=\"fa fa-repeat\"></i></button>\n\t\t\t\t" :
         "") + 
@@ -99,7 +121,28 @@
   }
 
   compiled.blocks = {
-    
+    'messages.reactions': function messagesreactions(helpers, context, guard, iter, helper) {
+      var __escape = helpers.__escape;
+      var value = context;
+      return iter(guard((context != null && context['messages'] != null) ? context['messages']['reactions'] : null), function each(key0, index, length, value) {
+        var key = key0;
+        return "\n\t<span class=\"reaction mb-2 " + 
+          (guard((context != null && context['messages'] != null && context['messages']['reactions'] != null && context['messages']['reactions'][key0] != null) ? context['messages']['reactions'][key0]['reacted'] : null) ?
+            "reacted" :
+            "") + 
+          "\" component=\"message/reaction\" data-mid=\"" + 
+          __escape(guard((context != null && context['messages'] != null && context['messages']['reactions'] != null && context['messages']['reactions'][key0] != null) ? context['messages']['reactions'][key0]['mid'] : null)) + 
+          "\" data-reaction=\"" + 
+          __escape(guard((context != null && context['messages'] != null && context['messages']['reactions'] != null && context['messages']['reactions'][key0] != null) ? context['messages']['reactions'][key0]['reaction'] : null)) + 
+          "\">\n\t" + 
+          __escape(guard((context != null && context['messages'] != null && context['messages']['reactions'] != null && context['messages']['reactions'][key0] != null) ? context['messages']['reactions'][key0]['reactionImage'] : null)) + 
+          "\n\t<small class=\"reaction-emoji-count\" data-count=\"" + 
+          __escape(guard((context != null && context['messages'] != null && context['messages']['reactions'] != null && context['messages']['reactions'][key0] != null) ? context['messages']['reactions'][key0]['reactionCount'] : null)) + 
+          "\"></small>\n</span>\n\n\t";
+      }, function alt() {
+        return "";
+      });
+    }
   };
 
   return compiled;

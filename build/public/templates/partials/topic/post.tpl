@@ -102,7 +102,20 @@
 	<div component="post/replies/container" class="my-2 col-11 border rounded-1 p-3 hidden-empty"></div>
 
 	<div component="post/actions" class="d-flex justify-content-end gap-1 post-tools">
-		<!-- This partial intentionally left blank; overwritten by nodebb-plugin-reactions -->
+		{{{ if config.enablePostReactions }}}
+<span class="reactions" component="post/reactions" data-pid="{./pid}">
+  <span class="reaction-add d-inline-block px-2 mx-1 btn-ghost-sm {{{ if ./maxReactionsReached }}}max-reactions{{{ end }}}" component="post/reaction/add" data-pid="{./pid}" title="[[reactions:add-reaction]]">
+    <i class="fa fa-face-smile text-primary"></i>
+  </span>
+  {{{ each ./reactions }}}
+    <span class="reaction {{{ if ./reacted }}}reacted{{{ end }}}" component="post/reaction" data-pid="{./pid}" data-reaction="{./reaction}">
+	{./reactionImage}
+	<small class="reaction-emoji-count" data-count="{./reactionCount}"></small>
+</span>
+
+  {{{ end }}}
+</span>
+{{{ end }}}
 		<a component="post/reply" href="#" class="btn-ghost-sm user-select-none {{{ if !privileges.topics:reply }}}hidden{{{ end }}}" title="[[topic:reply]]"><i class="fa fa-fw fa-reply text-primary"></i></a>
 		<a component="post/quote" href="#" class="btn-ghost-sm user-select-none {{{ if !privileges.topics:reply }}}hidden{{{ end }}}" title="[[topic:quote]]"><i class="fa fa-fw fa-quote-right text-primary"></i></a>
 

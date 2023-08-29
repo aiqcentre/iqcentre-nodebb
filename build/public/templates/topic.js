@@ -677,7 +677,38 @@
               "</span>\n\t\t\t<span class=\"ms-2 replies-last hidden-xs fw-semibold\">[[topic:last_reply_time]] <span class=\"timeago\" title=\"" + 
               __escape(guard((context != null && context['posts'] != null && context['posts'][key0] != null && context['posts'][key0]['replies'] != null) ? context['posts'][key0]['replies']['timestampISO'] : null)) + 
               "\"></span></span>\n\n\t\t\t<i class=\"fa fa-fw fa-chevron-down\" component=\"post/replies/open\"></i>\n\t\t\t<i class=\"fa fa-fw fa-chevron-up hidden\" component=\"post/replies/close\"></i>\n\t\t\t<i class=\"fa fa-fw fa-spin fa-spinner hidden\" component=\"post/replies/loading\"></i>\n\t\t</a>\n\t\t") + 
-          "\n\t</div>\n\n\t<div component=\"post/replies/container\" class=\"my-2 col-11 border rounded-1 p-3 hidden-empty\"></div>\n\n\t<div component=\"post/actions\" class=\"d-flex justify-content-end gap-1 post-tools\">\n\t\t<!-- This partial intentionally left blank; overwritten by nodebb-plugin-reactions -->\n\t\t<a component=\"post/reply\" href=\"#\" class=\"btn-ghost-sm user-select-none " + 
+          "\n\t</div>\n\n\t<div component=\"post/replies/container\" class=\"my-2 col-11 border rounded-1 p-3 hidden-empty\"></div>\n\n\t<div component=\"post/actions\" class=\"d-flex justify-content-end gap-1 post-tools\">\n\t\t" + 
+          (guard((context != null && context['config'] != null) ? context['config']['enablePostReactions'] : null) ?
+            "\n<span class=\"reactions\" component=\"post/reactions\" data-pid=\"" + 
+              __escape(guard((context != null && context['posts'] != null && context['posts'][key0] != null) ? context['posts'][key0]['pid'] : null)) + 
+              "\">\n  <span class=\"reaction-add d-inline-block px-2 mx-1 btn-ghost-sm " + 
+              (guard((context != null && context['posts'] != null && context['posts'][key0] != null) ? context['posts'][key0]['maxReactionsReached'] : null) ?
+                "max-reactions" :
+                "") + 
+              "\" component=\"post/reaction/add\" data-pid=\"" + 
+              __escape(guard((context != null && context['posts'] != null && context['posts'][key0] != null) ? context['posts'][key0]['pid'] : null)) + 
+              "\" title=\"[[reactions:add-reaction]]\">\n    <i class=\"fa fa-face-smile text-primary\"></i>\n  </span>\n  " + 
+              iter(guard((context != null && context['posts'] != null && context['posts'][key0] != null) ? context['posts'][key0]['reactions'] : null), function each(key1, index, length, value) {
+                var key = key1;
+                return "\n    <span class=\"reaction " + 
+                  (guard((context != null && context['posts'] != null && context['posts'][key0] != null && context['posts'][key0]['reactions'] != null && context['posts'][key0]['reactions'][key1] != null) ? context['posts'][key0]['reactions'][key1]['reacted'] : null) ?
+                    "reacted" :
+                    "") + 
+                  "\" component=\"post/reaction\" data-pid=\"" + 
+                  __escape(guard((context != null && context['posts'] != null && context['posts'][key0] != null && context['posts'][key0]['reactions'] != null && context['posts'][key0]['reactions'][key1] != null) ? context['posts'][key0]['reactions'][key1]['pid'] : null)) + 
+                  "\" data-reaction=\"" + 
+                  __escape(guard((context != null && context['posts'] != null && context['posts'][key0] != null && context['posts'][key0]['reactions'] != null && context['posts'][key0]['reactions'][key1] != null) ? context['posts'][key0]['reactions'][key1]['reaction'] : null)) + 
+                  "\">\n\t" + 
+                  __escape(guard((context != null && context['posts'] != null && context['posts'][key0] != null && context['posts'][key0]['reactions'] != null && context['posts'][key0]['reactions'][key1] != null) ? context['posts'][key0]['reactions'][key1]['reactionImage'] : null)) + 
+                  "\n\t<small class=\"reaction-emoji-count\" data-count=\"" + 
+                  __escape(guard((context != null && context['posts'] != null && context['posts'][key0] != null && context['posts'][key0]['reactions'] != null && context['posts'][key0]['reactions'][key1] != null) ? context['posts'][key0]['reactions'][key1]['reactionCount'] : null)) + 
+                  "\"></small>\n</span>\n\n  ";
+              }, function alt() {
+                return "";
+              }) + 
+              "\n</span>\n" :
+            "") + 
+          "\n\t\t<a component=\"post/reply\" href=\"#\" class=\"btn-ghost-sm user-select-none " + 
           (guard((context != null && context['privileges'] != null) ? context['privileges']['topics:reply'] : null) ?
             "" :
             "hidden") + 

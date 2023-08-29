@@ -154,10 +154,26 @@
 		<div component="chat/message/body" class="message-body ps-0 py-0 overflow-auto text-break">
 			{messages.content}
 		</div>
-		<!-- This partial intentionally left blank; overwritten by nodebb-plugin-reactions -->
+		{{{ if config.enableMessageReactions }}}
+<div class="reactions {{{ if messages.deleted}}}hidden{{{ end }}}" component="message/reactions" data-mid="{messages.mid}">
+	{{{ each messages.reactions }}}
+	<span class="reaction mb-2 {{{ if ./reacted }}}reacted{{{ end }}}" component="message/reaction" data-mid="{./mid}" data-reaction="{./reaction}">
+	{./reactionImage}
+	<small class="reaction-emoji-count" data-count="{./reactionCount}"></small>
+</span>
+
+	{{{ end }}}
+</div>
+{{{ end }}}
 		<div component="chat/message/controls" class="position-relative">
 			<div class="btn-group border shadow-sm controls position-absolute bg-body hover-d-block end-0" style="bottom:1rem;">
-				<!-- This partial intentionally left blank; overwritten by nodebb-plugin-reactions -->
+				{{{ if config.enableMessageReactions }}}
+<button class="reaction-add btn btn-sm btn-link {{{ if messages.maxReactionsReached }}}max-reactions{{{ end }}}" component="message/reaction/add" data-mid="{messages.mid}" title="[[reactions:add-reaction]]">
+    <i class="fa fa-face-smile"></i>
+</button>
+{{{ end }}}
+
+
 				<button class="btn btn-sm btn-link" data-action="reply"><i class="fa fa-reply"></i></button>
 				{{{ if (isAdminOrGlobalMod || (!config.disableChatMessageEditing && messages.self)) }}}
 				<button class="btn btn-sm btn-link" data-action="edit"><i class="fa fa-pencil"></i></button>
