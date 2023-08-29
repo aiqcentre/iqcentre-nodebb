@@ -1,0 +1,1 @@
+module.exports = require('../../../../../node_modules/nodebb-plugin-sso-auth0/static/lib/admin.js');
