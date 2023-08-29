@@ -1,0 +1,14 @@
+{
+    "url": "https://ask.iqcentre.com.au",
+    "secret": "0bjectBirdscenery!mpossible",
+    "database": "mongo",
+    "mongo": {
+        "host": "127.0.0.1",
+        "port": 27017,
+        "username": "",
+        "password": "",
+        "database": "nodebb",
+        "uri": "mongodb+srv://admin:PigSnout1@cluster0.z10eqvc.mongodb.net/?retryWrites=true&w=majority"
+    },
+    "port": 4567
+}
